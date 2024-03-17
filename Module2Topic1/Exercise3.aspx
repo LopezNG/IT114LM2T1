@@ -19,7 +19,7 @@
         <br />
         <br />
         <asp:Label runat="server" Text="Final Grade: "></asp:Label>
-        <asp:Label ID="finalGrade" runat="server" Text=""></asp:Label>
+        <asp:Label ID="finalGradeLabel" runat="server" Text=""></asp:Label>
         
     </form>
 </body>

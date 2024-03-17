@@ -24,12 +24,12 @@ namespace Module1Exercise1
         protected global::System.Web.UI.WebControls.TextBox percentageGrade;
 
         /// <summary>
-        /// finalGrade control.
+        /// finalGradeLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label finalGrade;
+        protected global::System.Web.UI.WebControls.Label finalGradeLabel;
     }
 }

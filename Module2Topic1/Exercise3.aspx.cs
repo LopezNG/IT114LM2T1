@@ -9,9 +9,26 @@ namespace Module1Exercise1
 {
     public partial class Exercise3 : System.Web.UI.Page
     {
+        protected void btnCalculate_Click(object sender, EventArgs e)
+        {
+            double percentage;
+            if (double.TryParse(percentageGrade.Text, out percentage))
+            {
+                double numericalGrade = percentage / 100.0 * 5.0;
+
+                finalGradeLabel.Text = numericalGrade.ToString();
+
+            }
+            else
+            {
+                finalGradeLabel.Text = "Invalid input";
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // TODO 3.3 Set the text value of the finalGrade label to "Submit your grade percentage to see your final grade!". Watch out for post backs
         }
+
     }
 }
