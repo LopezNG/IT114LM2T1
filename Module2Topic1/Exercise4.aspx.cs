@@ -13,5 +13,16 @@ namespace Module1Exercise1
         {
 
         }
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                result.Text = $"Full Name: {fullName.Text}<br />Age: {age.Text}<br />Email: {email.Text}<br />Confirm Email: {confirmEmail.Text}";
+            }
+            else
+            {
+                result.Text = "Validation failed.";
+            }
+        }
     }
 }
