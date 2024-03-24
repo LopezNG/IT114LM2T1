@@ -4,36 +4,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Exercise 4</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
 </head>
 <body>
     <h1>Mapua MCL WebDev Club Registration</h1>
     <form runat="server">
+        <asp:ScriptManager runat="server" ScriptMode="Release">
+            <Scripts>
+                <asp:ScriptReference Name="jquery" />
+            </Scripts>
+        </asp:ScriptManager>
+
         <asp:Label runat="server" Text="Full Name"></asp:Label><br />
-        <asp:TextBox runat="server" ID="fullName" /><br />
+        <asp:TextBox runat="server" ID="fullName" required/><br />
         <%-- Todo 4.1 Add a validator that makes sure the text box is not empty --%>
         <%-- Hint: https://www.tutorialspoint.com/asp.net/asp.net_validators.htm#:~:text=RequiredFieldValidator%20Control --%>
-        <asp:RequiredFieldValidator ID="rfvFullName" runat="server" ControlToValidate="fullName" ErrorMessage="Full Name is required" Display="Dynamic" /><br />
 
         <asp:Label runat="server" Text="Age"></asp:Label><br />
-        <asp:TextBox runat="server" ID="age" TextMode="Number" /><br />
+        <asp:TextBox runat="server" ID="age" TextMode="Number" min="1" max="100" /><br />
         <%-- Todo 4.2 Add a range validator that checks if the value inputted in the text box is within 0 and 100--%>
         <%-- Hint: https://www.tutorialspoint.com/asp.net/asp.net_validators.htm#:~:text=RangeValidator%20Control--%>
-        <asp:RangeValidator ID="rvAge" runat="server" ControlToValidate="age" ErrorMessage="Age must be between 0 and 100" MinimumValue="0" MaximumValue="100" Type="Integer" /><br />
 
         <asp:Label runat="server" Text="Email"></asp:Label><br />
         <asp:TextBox runat="server" ID="email" /><br />
+        <asp:RegularExpressionValidator ID="emailValidator" runat="server" ControlToValidate="email"
+            ErrorMessage="Please enter a valid email address" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" /><br />
         <%-- Todo 4.3 Add a regex validator that checks if the inputted value is a valid email. The regex for validating email is /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ --%>
         <%-- Hint: https://www.tutorialspoint.com/asp.net/asp.net_validators.htm#:~:text=The%20RegularExpressionValidator%20allows --%>
-        <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="email" ErrorMessage="Invalid email format" ValidationExpression="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" /><br />
 
         <asp:Label runat="server" Text="Confirm Email"></asp:Label><br />
         <asp:TextBox runat="server" ID="confirmEmail" /><br />
+        <asp:CompareValidator ID="confirmEmailValidator" runat="server" ControlToValidate="confirmEmail"
+            ControlToCompare="email" ErrorMessage="Emails do not match" ValidationGroup="validateEmails" /><br />
+        <asp:Button runat="server" Text="Submit" ValidationGroup="validateEmails" />
         <%-- Todo 4.4 Add a compare validator that checks if the confirmation email is the same as the original email --%>
         <%-- Hint: https://www.tutorialspoint.com/asp.net/asp.net_validators.htm#:~:text=CompareValidator%20Control --%>
-        <asp:CompareValidator ID="cvConfirmEmail" runat="server" ControlToValidate="confirmEmail" ControlToCompare="email" ErrorMessage="Emails do not match" /><br />
 
-        <asp:Button Text="Submit" runat="server" OnClick="btnSubmit_Click" UseSubmitBehavior="true" />
+        <asp:Button Text="Submit" runat="server" UseSubmitBehavior="true" />
         <asp:Label ID="result" runat="server" />
         <%-- Todo 4.5 When the user submits the form and all validations pass, display all the inputted texts in the "result" label --%>
     </form>

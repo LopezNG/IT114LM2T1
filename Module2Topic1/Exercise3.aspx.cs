@@ -9,26 +9,37 @@ namespace Module1Exercise1
 {
     public partial class Exercise3 : System.Web.UI.Page
     {
-        protected void btnCalculate_Click(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            double percentage;
-            if (double.TryParse(percentageGrade.Text, out percentage))
+            if (!IsPostBack)
             {
-                double numericalGrade = percentage / 100.0 * 5.0;
+                finalGrade.Text = "Submit your grade percentage to see your final grade!";
+            }
+        }
 
-                finalGradeLabel.Text = numericalGrade.ToString();
+        protected void Calculate_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(percentageGrade.Text))
+            {
+                if (double.TryParse(percentageGrade.Text, out double percentage))
+                {
+                    double finalGradeValue = percentage * 0.01;
+                    finalGrade.Text = finalGradeValue.ToString("N2");
 
+                    if (finalGradeValue == 1.00)
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Congratulations! You got a perfect score!');", true);
+                    }
+                }
+                else
+                {
+                    finalGrade.Text = "Invalid input!";
+                }
             }
             else
             {
-                finalGradeLabel.Text = "Invalid input";
+                finalGrade.Text = "Please enter a percentage grade!";
             }
         }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            // TODO 3.3 Set the text value of the finalGrade label to "Submit your grade percentage to see your final grade!". Watch out for post backs
-        }
-
     }
 }
